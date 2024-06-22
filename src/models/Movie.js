@@ -20,6 +20,8 @@ const Movie = sequelize.define('movie', {
     },
 
     // Actor
+    // Director
+    // Genre
 });
 
 module.exports = Movie;

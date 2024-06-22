@@ -44,7 +44,7 @@ const setActors = catchError(async (req, res) => {
     await movie.setActors(req.body)
     const actor = await movie.getActors()
     return res.json(actor)
- })
+ });
 
 const setGenres = catchError(async(req, res) => {
     const {id} = req.params
@@ -57,9 +57,18 @@ const setGenres = catchError(async(req, res) => {
 const setDirectors = catchError(async(req, res) => {
     const {id} = req.params
     const movie = await Movie.findByPk(id)
-    await movie.setDirectors(req.body)
-    const director = await movie.getDirectors()
-    return res.json(director)
+
+    if (movie) {
+        //!courses le tengo que setear estudiantes
+        await movie.setDirectors(req.body)
+        //!obtener los estudiantes seteados
+        const director = await movie.getDirectors()
+        return res.json(director)
+      }
+        return res.status(404).json({ error: "Course not found" })
+    // await movie.setDirectors(req.body)
+    // const director = await movie.getDirectors()
+    // return res.json(director)
 });
 
 
